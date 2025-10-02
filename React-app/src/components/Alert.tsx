@@ -2,10 +2,10 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  onToggleAlert: () => void;
+  onClose: () => void;
 }
 
-const Alert = ({ children, onToggleAlert }: Props) => {
+const Alert = ({ children, onClose }: Props) => {
   return (
     <>
       <div
@@ -14,7 +14,7 @@ const Alert = ({ children, onToggleAlert }: Props) => {
       >
         {children}
         <button
-          onClick={onToggleAlert}
+          onClick={onClose}
           type="button"
           className="btn-close"
           data-bs-dismiss="alert"
