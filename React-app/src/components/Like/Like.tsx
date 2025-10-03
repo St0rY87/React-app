@@ -15,9 +15,9 @@ const Like = ({ onClick }: Props) => {
   return (
     <span onClick={toggleLike} style={{ cursor: "pointer" }}>
       {isLike ? (
-        <IoMdHeart size={40} fill="red"></IoMdHeart>
+        <IoMdHeart size={40} color="red"></IoMdHeart>
       ) : (
-        <IoMdHeartEmpty size={40} fill="red"></IoMdHeartEmpty>
+        <IoMdHeartEmpty size={40} color="red"></IoMdHeartEmpty>
       )}
     </span>
   );
