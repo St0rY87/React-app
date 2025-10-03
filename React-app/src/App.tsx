@@ -59,15 +59,14 @@ function App() {
   //   setCartItems([]);
   // }
 
-  const [game, setGame] = useState({
-    id: 1,
-    player: {
-      name: "Jhon",
-    },
+  const [pizza, setPizza] = useState({
+    name: "Spicy Pepperoni",
+    toppings: ["Mushroom"],
   });
 
-  const handleClick = (name: string) => {
-    setGame({ ...game, player: { ...game.player, name } });
+  const handleClick = (topping: string) => {
+    setPizza({ ...pizza, toppings: [...pizza.toppings, topping] });
+    console.log(pizza);
   };
 
   return (
@@ -80,7 +79,8 @@ function App() {
     //   </Button>
     // </div>
     <div>
-      <button onClick={() => handleClick("Jora")}>{game.player.name}</button>
+      <button onClick={() => handleClick(" caramel")}>{pizza.toppings}</button>
+      {/* <button onClick={() => handleClick("Jora")}>{game.player.name}</button> */}
       {/* <button onClick={() => handleCustomer("Majorka2")}>Hello</button> */}
       {/* <ListGroup
         items={items}
