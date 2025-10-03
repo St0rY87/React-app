@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Alert from "./components/Alert";
-import Button from "./components/Button";
+import Button from "./components/Button/Button";
 import ListGroup from "./components/ListGroup/ListGroup";
+import Like from "./components/Like/Like";
 
 function App() {
   const [alertVisible, setAlertVisibility] = useState(false);
@@ -21,11 +22,15 @@ function App() {
     //   </Button>
     // </div>
     <div>
-      <ListGroup
+      {/* <ListGroup
         items={items}
         heading="List"
         onSelectItem={(item) => console.log(item)}
       />
+      <Button onClick={() => console.log("hello")} color={"primary"}>
+        Hello
+      </Button> */}
+      <Like onClick={() => console.log("click")} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-
+import { BsFillCalendar3Fill } from "react-icons/bs";
 const List = styled.ul`
   list-style: none;
   color: tomato;
@@ -12,6 +12,9 @@ interface ListItemProps {
 }
 
 const ListItem = styled.li<ListItemProps>`
+  display: flex;
+  justify-items: center;
+  align-items: center;
   padding: 5px 0;
   background: ${(props) => (props.active ? "blue" : "none")};
 `;
@@ -29,11 +32,16 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
     setSelectedIndex(index);
   }
 
+  const Button = styled.button`
+    background-color: tomato;
+    color: #fff;
+  `;
+
   return (
     <>
       <h1>{heading}</h1>
-
-      {!items.length && <p>No item found</p>}
+      <Button>Button</Button>
+      {/* {!items.length && <p>No item found</p>}
 
       <List>
         {items.map((item, index) => (
@@ -45,10 +53,14 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
               onSelectItem(item);
             }}
           >
+            <BsFillCalendar3Fill
+              color="green"
+              style={{ marginRight: "10px" }}
+            />
             {item}
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </>
   );
 }
