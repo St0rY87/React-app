@@ -69,6 +69,25 @@ function App() {
     console.log(pizza);
   };
 
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      { id: 1, title: "Product 1", quantity: 1 },
+      { id: 2, title: "Product 1", quantity: 1 },
+    ],
+  });
+
+  const handleClick2 = (id: number) => {
+    setCart({
+      ...cart,
+      items: cart.items.map(
+        (item: { id: number; title: string; quantity: number }) =>
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    });
+  };
+
+  console.log(cart);
   return (
     // <div>
     //   {alertVisible && (
@@ -80,6 +99,7 @@ function App() {
     // </div>
     <div>
       <button onClick={() => handleClick(" caramel")}>{pizza.toppings}</button>
+      <button onClick={() => handleClick2(2)}>add quantity</button>
       {/* <button onClick={() => handleClick("Jora")}>{game.player.name}</button> */}
       {/* <button onClick={() => handleCustomer("Majorka2")}>Hello</button> */}
       {/* <ListGroup
