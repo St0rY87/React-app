@@ -1,5 +1,10 @@
 import { FormEvent, useRef, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import {z} from 'zod';
+// interface FormData {
+//   name: string;
+//   age: number;
+// }
 
 interface FormData {
   name: string;
@@ -14,6 +19,7 @@ const Form = () => {
   } = useForm<FormData>();
 
   const onSubmit = (data: FieldValues) => console.log(data);
+  console.log(errors);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
