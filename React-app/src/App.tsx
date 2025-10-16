@@ -4,11 +4,24 @@ import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseForm";
 import categories from "./expense-tracker/categories";
 import ProductList from "./components/ProductList";
+import axios from "axios";
 
 const connect = () => console.log("connecting");
 const disconnect = () => console.log("disconnecting");
 
+interface User {
+  id: number;
+  name: string;
+}
+
 function App() {
+  const [users, setUsers] = useState<User[]>([]);
+  useEffect(() => {
+    axios
+      .get<User[]>("https://jsonplaceholder.typicode.com/users")
+      .then((res) => console.log(setUsers(res.data)));
+  }, []);
+
   // const [expenses, setExpenses] = useState([
   //   { id: 1, description: "aaa", amount: 10, category: "Utilities" },
   //   { id: 2, description: "bbb", amount: 10, category: "Groceries" },
@@ -33,7 +46,10 @@ function App() {
   });
   // const [category, setCategory] = useState("");
   return (
-    <div>
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
       {/* <ExpenseForm onSubmit={expense => setExpenses([...expenses, {...expense, id: expenses.length + 1 }])} />
       <ExpenseFilter
         onSelectCategory={(category) => setSelectedCategory(category)}
@@ -46,7 +62,7 @@ function App() {
                 <option value="Household">Household</option>
             </select> */}
       {/* <ProductList category={category} /> */}
-    </div>
+    </ul>
   );
 }
 
