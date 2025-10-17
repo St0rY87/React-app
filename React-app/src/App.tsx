@@ -1,10 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import ExpenseList from "./expense-tracker/components/ExpenseList";
-import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
-import ExpenseForm from "./expense-tracker/components/ExpenseForm";
-import categories from "./expense-tracker/categories";
-import ProductList from "./components/ProductList";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import axios, { AxiosError, CanceledError } from "axios";
 
 const connect = () => console.log("connecting");
 const disconnect = () => console.log("disconnecting");
@@ -18,10 +13,19 @@ function App() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
   useEffect(() => {
+    const controller = new AbortController();
+
     axios
-      .get<User[]>("https://jsonplaceholder.typicode.com/users1")
+      .get<User[]>("https://jsonplaceholder.typicode.com/users", {
+        signal: controller.signal,
+      })
       .then((res) => console.log(setUsers(res.data)))
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    return () => controller.abort();
   }, []);
 
   // const [expenses, setExpenses] = useState([
