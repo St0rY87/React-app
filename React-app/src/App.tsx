@@ -16,10 +16,12 @@ interface User {
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState("");
   useEffect(() => {
     axios
-      .get<User[]>("https://jsonplaceholder.typicode.com/users")
-      .then((res) => console.log(setUsers(res.data)));
+      .get<User[]>("https://jsonplaceholder.typicode.com/users1")
+      .then((res) => console.log(setUsers(res.data)))
+      .catch((err) => setError(err.message));
   }, []);
 
   // const [expenses, setExpenses] = useState([
@@ -46,23 +48,26 @@ function App() {
   });
   // const [category, setCategory] = useState("");
   return (
-    <ul>
-      {users.map((user) => (
-        <li key={user.id}>{user.name}</li>
-      ))}
-      {/* <ExpenseForm onSubmit={expense => setExpenses([...expenses, {...expense, id: expenses.length + 1 }])} />
+    <>
+      {error && <p className="text-danger">{error}</p>}
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+        {/* <ExpenseForm onSubmit={expense => setExpenses([...expenses, {...expense, id: expenses.length + 1 }])} />
       <ExpenseFilter
         onSelectCategory={(category) => setSelectedCategory(category)}
       />
       <ExpenseList expenses={visibleExpenses} onDelete={deleteItem} />
        */}
-      {/* <select onChange={e => setCategory( e.target.value)} className="form-select">
+        {/* <select onChange={e => setCategory( e.target.value)} className="form-select">
                 <option value=""></option>
                 <option value="Clothing">Clothing</option>
                 <option value="Household">Household</option>
             </select> */}
-      {/* <ProductList category={category} /> */}
-    </ul>
+        {/* <ProductList category={category} /> */}
+      </ul>
+    </>
   );
 }
 
